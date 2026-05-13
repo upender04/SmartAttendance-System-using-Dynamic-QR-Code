@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import TeacherDashboard from './pages/TeacherDashboard';
 import StudentDashboard from './pages/StudentDashboard';
+import ThemeToggle from "./components/ThemeToggle";
 
 // Protected Route Component
 const ProtectedRoute = ({ children, allowedRole }) => {
@@ -32,6 +33,11 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+
+           <div className="flex justify-end p-4">
+            <ThemeToggle />
+            </div>
+            
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/login" element={<Login />} />

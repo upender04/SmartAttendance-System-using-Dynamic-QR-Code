@@ -79,8 +79,23 @@ smart-attendance/
 
 ## Deployment
 
-*   **Frontend (Vercel):** The `client` folder is ready to be deployed to Vercel. Ensure the build command is `npm run build` and the output directory is `dist`. You will need to change the API base URL in the frontend code to point to your live backend.
-*   **Backend (Render/Railway):** The `server` folder can be deployed as a web service. Ensure you set the `JWT_SECRET` environment variable in the host's dashboard.
+*   **Frontend (Vercel / Netlify / any static host):** The `client` folder is ready for deployment.
+    * Build command: `npm run build`
+    * Output directory: `dist`
+    * Set `VITE_API_BASE_URL` in your deployment environment to the backend URL, for example `https://your-backend.example.com`.
+    * In development, it falls back to `http://localhost:5000`.
+*   **Backend (Render / Railway / Heroku / any Node host):** Deploy the `server` folder as a Node service.
+    * Install dependencies with `npm install`.
+    * Start with `npm start`.
+    * Required environment variables:
+      * `JWT_SECRET` — secret used to sign user tokens
+      * `PORT` — optional, defaults to `5000`
+
+### Example deploy flow
+
+1. Deploy the backend first and note the live URL.
+2. Deploy the frontend and set `VITE_API_BASE_URL` to that URL.
+3. Open the frontend and verify login/signup works against the live API.
 
 ## Troubleshooting
 
