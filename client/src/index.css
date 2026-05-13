@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans antialiased;
+  }
+  
+  /* Dark mode support */
+  .dark body {
+    @apply bg-slate-900 text-slate-50;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl;
+  }
+  
+  .dark .glass-card {
+    @apply bg-slate-800/50 border-slate-700/50 shadow-2xl;
+  }
+  
+  .btn-primary {
+    @apply bg-brand-600 text-white font-medium py-2 px-4 rounded-lg;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.3);
+  }
+
+  .btn-primary:hover {
+    @apply bg-brand-700;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-2 border border-slate-200 rounded-lg outline-none;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: all 0.2s ease;
+  }
+
+  .input-field:focus {
+    @apply ring-2 ring-brand-500 border-transparent;
+  }
+
+  .dark .input-field {
+    @apply text-white placeholder-slate-400;
+    background-color: rgba(30, 41, 59, 0.5);
+    border-color: rgba(100, 116, 139, 0.5);
+  }
+
+  .dark .input-field:focus {
+    box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.5);
+  }
+}
+
