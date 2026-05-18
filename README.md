@@ -50,7 +50,7 @@ cd client
 npm install
 npm start
 ```
-*Note: `npm start` is mapped to `vite` which starts the dev server (typically on http://localhost:5173).*
+*Note: `npm start` is mapped to `vite` which starts the dev server (typically on https://smartattendance-system-using-dynamic-qr.onrender.com).*
 
 ## Project Structure
 
@@ -83,7 +83,7 @@ smart-attendance/
     * Build command: `npm run build`
     * Output directory: `dist`
     * Set `VITE_API_BASE_URL` in your deployment environment to the backend URL, for example `https://your-backend.example.com`.
-    * In development, it falls back to `http://localhost:5000`.
+    * In development, it falls back to `https://smartattendance-system-using-dynamic-qr.onrender.com`.
 *   **Backend (Render / Railway / Heroku / any Node host):** Deploy the `server` folder as a Node service.
     * Install dependencies with `npm install`.
     * Start with `npm start`.
@@ -100,4 +100,4 @@ smart-attendance/
 ## Troubleshooting
 
 *   **Tailwind styles not applying?** Ensure `npm install` completed successfully in the `client` folder.
-*   **Backend not connecting?** Ensure the backend is running on `http://localhost:5000` (check the console for "Server is running on port 5000"). If the port is in use, change the `PORT` in `server/.env` and update the Axios requests in the frontend pages.
+*   **Backend not connecting?** Ensure the backend is running on `https://smartattendance-system-using-dynamic-qr.onrender.com` (check the console for "Server is running on port 5000"). If the port is in use, change the `PORT` in `server/.env` and update the Axios requests in the frontend pages.

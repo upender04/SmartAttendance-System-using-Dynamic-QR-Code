@@ -9,9 +9,9 @@ const db = new sqlite3.Database(dbPath, (err) => {
     console.error('Error opening database', err.message);
   } else {
     console.log('Connected to the SQLite database.');
-    
+
     db.serialize(() => {
-      // Create Users table
+
       db.run(`CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
@@ -22,18 +22,6 @@ const db = new sqlite3.Database(dbPath, (err) => {
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )`);
 
-      // Add rollNo column if it doesn't exist (migration)
-      db.run(`PRAGMA table_info(users)`, (err, rows) => {
-        if (!rows || !rows.find(col => col.name === 'rollNo')) {
-          db.run(`ALTER TABLE users ADD COLUMN rollNo TEXT`, (err) => {
-            if (err && !err.message.includes('duplicate column')) {
-              console.log('Added rollNo column to users table');
-            }
-          });
-        }
-      });
-
-      // Create Sessions table
       db.run(`CREATE TABLE IF NOT EXISTS sessions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         teacher_id INTEGER NOT NULL,
@@ -44,7 +32,6 @@ const db = new sqlite3.Database(dbPath, (err) => {
         FOREIGN KEY (teacher_id) REFERENCES users(id)
       )`);
 
-      // Create Attendance table
       db.run(`CREATE TABLE IF NOT EXISTS attendance (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         session_id INTEGER NOT NULL,
@@ -55,29 +42,6 @@ const db = new sqlite3.Database(dbPath, (err) => {
         FOREIGN KEY (student_id) REFERENCES users(id)
       )`);
 
-      // Seed default accounts if they don't exist
-      const seedUsers = async () => {
-        const teacherPassword = await bcrypt.hash('Teacher123', 10);
-        const studentPassword = await bcrypt.hash('Student123', 10);
-
-        db.get("SELECT id FROM users WHERE email = ?", ['teacher@test.com'], (err, row) => {
-          if (!row) {
-            db.run(`INSERT INTO users (name, email, password, rollNo, role) VALUES (?, ?, ?, ?, ?)`, 
-              ['Test Teacher', 'teacher@test.com', teacherPassword, 'T001', 'teacher']);
-            console.log('Test Teacher seeded.');
-          }
-        });
-
-        db.get("SELECT id FROM users WHERE email = ?", ['student@test.com'], (err, row) => {
-          if (!row) {
-            db.run(`INSERT INTO users (name, email, password, rollNo, role) VALUES (?, ?, ?, ?, ?)`, 
-              ['Test Student', 'student@test.com', studentPassword, 'S001', 'student']);
-            console.log('Test Student seeded.');
-          }
-        });
-      };
-      
-      seedUsers();
     });
   }
 });
