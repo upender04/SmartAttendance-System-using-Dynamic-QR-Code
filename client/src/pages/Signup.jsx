@@ -35,7 +35,7 @@ const Signup = () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/api/auth/request-otp', {
+      await axios.post('https://smartattendance-system-using-dynamic-qr.onrender.com/api/auth/request-otp', {
         email: formData.email,
         name: formData.name
       });
@@ -59,7 +59,7 @@ const Signup = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/signup', {
+      const res = await axios.post('https://smartattendance-system-using-dynamic-qr.onrender.com/api/auth/signup', {
         ...formData,
         otp
       });

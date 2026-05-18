@@ -18,7 +18,7 @@ const StudentDashboard = () => {
 
   const fetchHistory = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/attendance/history');
+      const res = await axios.get('https://smartattendance-system-using-dynamic-qr.onrender.com/api/attendance/history');
       setHistory(res.data);
     } catch (err) {
       console.error(err);
@@ -28,7 +28,7 @@ const StudentDashboard = () => {
 
   const fetchStats = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/attendance/stats');
+      const res = await axios.get('https://smartattendance-system-using-dynamic-qr.onrender.com/api/attendance/stats');
       setStats(res.data);
     } catch (err) {
       console.error(err);
@@ -40,7 +40,7 @@ const StudentDashboard = () => {
     setLoading(true);
     
     try {
-      await axios.post('http://localhost:5000/api/attendance/mark', { sessionCode });
+      await axios.post('https://smartattendance-system-using-dynamic-qr.onrender.com/api/attendance/mark', { sessionCode });
       toast.success('Attendance marked successfully!');
       setSessionCode('');
       fetchHistory();

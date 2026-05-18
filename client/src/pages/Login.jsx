@@ -20,7 +20,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const res = await axios.post('https://smartattendance-system-using-dynamic-qr.onrender.com/api/auth/login', formData);
       login(res.data.user, res.data.token);
       toast.success('Logged in successfully!');
       
