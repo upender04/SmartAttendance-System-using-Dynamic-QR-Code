@@ -38,7 +38,7 @@ const TeacherDashboard = () => {
 
   const fetchActiveSessions = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/session/active');
+      const res = await axios.get('https://smartattendance-system-using-dynamic-qr.onrender.com/api/session/active');
       setActiveSessions(res.data);
     } catch (err) {
       console.error(err);
@@ -48,7 +48,7 @@ const TeacherDashboard = () => {
 
   const fetchHistory = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/attendance/all');
+      const res = await axios.get('https://smartattendance-system-using-dynamic-qr.onrender.com/api/attendance/all');
       setAttendanceHistory(res.data);
     } catch (err) {
       console.error(err);
@@ -59,7 +59,7 @@ const TeacherDashboard = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/session/create', { subject });
+      const res = await axios.post('https://smartattendance-system-using-dynamic-qr.onrender.com/api/session/create', { subject });
       toast.success('Session created successfully!');
       setSubject('');
       fetchActiveSessions();
@@ -72,7 +72,7 @@ const TeacherDashboard = () => {
 
   const handleEndSession = async (sessionId) => {
     try {
-      await axios.post('http://localhost:5000/api/session/end', { sessionId });
+      await axios.post('https://smartattendance-system-using-dynamic-qr.onrender.com/api/session/end', { sessionId });
       toast.info('Session ended.');
       fetchActiveSessions();
       fetchHistory(); // Refresh history
